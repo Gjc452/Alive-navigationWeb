@@ -176,43 +176,48 @@ var _on = _interopRequireDefault(require("./lib/on"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var siteList = document.querySelector('.siteList');
-var addList = document.querySelector('#addList');
-var addContent = document.querySelector('.addContent');
-var reviseContent = document.querySelector('.reviseContent');
-var myHashMap = JSON.parse(window.localStorage.getItem('site'));
+var siteList = document.querySelector(".siteList");
+var addList = document.querySelector("#addList");
+var addContent = document.querySelector(".addContent");
+var reviseContent = document.querySelector(".reviseContent");
+var myHashMap = JSON.parse(window.localStorage.getItem("site"));
 var close;
 var site;
 var inIcon;
 var hashMap = myHashMap || [{
-  url: 'http://bonsaiden.github.io/JavaScript-Garden/zh/',
-  webName: 'JavaScript 秘密花园',
-  disName: 'JS秘密花园',
+  url: "http://gjc452.gitee.io/drib-money-website/#/",
+  webName: "点滴记账",
+  disName: "Vue版",
   backColor: "red"
 }, {
-  url: 'https://wangdoc.com/',
-  webName: '网道 - 互联网开发文档',
-  disName: '网道',
+  url: "http://gjc452.gitee.io/drib-money-react/#/",
+  webName: "点滴记账",
+  disName: "React版",
   backColor: "sky"
 }, {
-  url: 'https://developer.mozilla.org/zh-CN/docs/Web',
-  webName: 'MDN',
-  disName: 'Web开发技术 | MDN',
+  url: "https://gjc452.gitee.io/wish3-ui-website",
+  webName: "Wish3-UI",
+  disName: "Vue3组件库",
   backColor: "blue"
 }, {
-  url: 'https://juejin.cn/',
-  webName: '掘金',
-  disName: '掘金',
+  url: "https://github.com/Gjc452/dom-demo-1/blob/main/src/dom.js",
+  webName: "DOM库",
+  disName: "手写DOM库",
   backColor: "yellow"
 }, {
-  url: 'https://github.com/Gjc452',
-  webName: '我的GitHub',
-  disName: 'GitHub',
+  url: "https://gjc452.github.io/canvas-1.0/dist/",
+  webName: "Canvas 画板",
+  disName: "画板",
+  backColor: "yellow"
+}, {
+  url: "https://github.com/Gjc452",
+  webName: "我的GitHub",
+  disName: "GitHub",
   backColor: "violet"
 }, {
-  url: 'https://www.yuque.com/xihang-c9xlp/guegsk',
-  webName: '我的博客',
-  disName: '语雀',
+  url: "https://www.yuque.com/xihang-c9xlp/guegsk",
+  webName: "我的博客",
+  disName: "语雀",
   backColor: "blue"
 }]; // 渲染网站列表
 
@@ -226,12 +231,12 @@ var render = function render() {
 
   var id = 0;
   hashMap.forEach(function (node, index) {
-    var li = "\n    <li class= siteWrap".concat(id, " data=\"").concat(id, "\">\n      <div class=\"site ").concat(node.backColor, "\">\n        <div class=\"logo\">\n          <text x=\"45\" y=\"45\" fill=\"white\" text-anchor=\"middle\" dominant-baseline=\"middle\"\n          font-size=\"20px\">\n            ").concat(node.disName, "\n          </text>\n          <svg class=\"icon  inIcon\" aria-hidden=\"true\">\n            <use xlink:href=\"#icon-revise\"></use>\n          </svg>\n        </div>\n        <div class=\"close\">\n          <svg class=\"icon\" aria-hidden=\"true\">\n            <use xlink:href=\"#icon-close\"></use>\n          </svg>\n        </div>\n       </div>\n       <div class=\"link\">").concat(node.webName, "</div>\n    </li>\n  ");
-    var add = document.createElement('template');
+    var li = "\n      <li class= siteWrap".concat(id, " data=\"").concat(id, "\">\n        <div class=\"site ").concat(node.backColor, "\">\n          <div class=\"logo\">\n            <text x=\"45\" y=\"45\" fill=\"white\" text-anchor=\"middle\" dominant-baseline=\"middle\"\n            font-size=\"20px\">\n              ").concat(node.disName, "\n            </text>\n            <svg class=\"icon  inIcon\" aria-hidden=\"true\">\n              <use xlink:href=\"#icon-revise\"></use>\n            </svg>\n          </div>\n          <div class=\"close\">\n            <svg class=\"icon\" aria-hidden=\"true\">\n              <use xlink:href=\"#icon-close\"></use>\n            </svg>\n          </div>\n         </div>\n         <div class=\"link\">").concat(node.webName, "</div>\n      </li>\n    ");
+    var add = document.createElement("template");
     add.innerHTML = li.trim();
     siteList.appendChild(add.content.firstChild);
-    var siteWrap = document.querySelector('.siteWrap' + id.toString());
-    (0, _on.default)('click', siteWrap, '.close', function (t) {
+    var siteWrap = document.querySelector(".siteWrap" + id.toString());
+    (0, _on.default)("click", siteWrap, ".close", function (t) {
       if (t) {
         hashMap.splice(index, 1);
         render();
@@ -241,22 +246,22 @@ var render = function render() {
     });
     id += 1;
   });
-  close = document.querySelectorAll('.close');
-  site = document.querySelectorAll('.site');
-  inIcon = document.querySelectorAll('.inIcon');
+  close = document.querySelectorAll(".close");
+  site = document.querySelectorAll(".site");
+  inIcon = document.querySelectorAll(".inIcon");
 };
 
-render(); // // 存储数据
+render(); // 存储数据
 
 window.onbeforeunload = function () {
-  window.localStorage.setItem('site', JSON.stringify(hashMap));
+  window.localStorage.setItem("site", JSON.stringify(hashMap));
 }; // 鼠标右键删除样式
 
 
-siteList.addEventListener('mousedown', function (e) {
+siteList.addEventListener("mousedown", function (e) {
   var t = e.target;
 
-  while (!t.matches('li')) {
+  while (!t.matches("li")) {
     if (t === siteList) {
       t = null;
       break;
@@ -268,16 +273,16 @@ siteList.addEventListener('mousedown', function (e) {
   if (t) {
     if (e.button === 2) {
       close.forEach(function (node) {
-        node.classList.add('active');
+        node.classList.add("active");
       });
       site.forEach(function (node) {
-        node.classList.add('active');
+        node.classList.add("active");
       });
       inIcon.forEach(function (node) {
-        node.classList.add('active');
+        node.classList.add("active");
       });
       siteList.childNodes.forEach(function (node) {
-        node.classList.add('deleteWeb');
+        node.classList.add("deleteWeb");
       });
     }
 
@@ -287,33 +292,33 @@ siteList.addEventListener('mousedown', function (e) {
   }
 }); // 取消删除样式
 
-(0, _on.default)('click', document.body, '.site', function (t) {
+(0, _on.default)("click", document.body, ".site", function (t) {
   if (!t) {
     close.forEach(function (node) {
-      node.classList.remove('active');
+      node.classList.remove("active");
     });
     site.forEach(function (node) {
-      node.classList.remove('active');
+      node.classList.remove("active");
     });
     inIcon.forEach(function (node) {
-      node.classList.remove('active');
+      node.classList.remove("active");
     });
     siteList.childNodes.forEach(function (node) {
-      node.classList.remove('deleteWeb');
+      node.classList.remove("deleteWeb");
     });
   }
 }); // 显示添加栏
 
-addList.addEventListener('click', function () {
+addList.addEventListener("click", function () {
   setTimeout(function () {
-    addContent.classList.add('active');
+    addContent.classList.add("active");
   });
 });
-siteList.addEventListener('click', function (e) {
+siteList.addEventListener("click", function (e) {
   var t = e.target;
 
-  while (!t.matches('.deleteWeb')) {
-    if (t === siteList || t.matches('.close')) {
+  while (!t.matches(".deleteWeb")) {
+    if (t === siteList || t.matches(".close")) {
       t = null;
       break;
     }
@@ -323,99 +328,99 @@ siteList.addEventListener('click', function (e) {
 
   if (t) {
     setTimeout(function () {
-      reviseContent.classList.add('active');
+      reviseContent.classList.add("active");
     });
   }
 }); // 隐藏添加栏
 
-var closeAddContent = document.querySelectorAll('.closeAddContent');
-(0, _on.default)('click', document.body, '.addContent', function (t) {
+var closeAddContent = document.querySelectorAll(".closeAddContent");
+(0, _on.default)("click", document.body, ".addContent", function (t) {
   if (addContent.classList.length === 2) {
     if (!t) {
-      addContent.classList.remove('active');
+      addContent.classList.remove("active");
     }
   }
 });
-(0, _on.default)('click', document.body, '.reviseContent', function (t) {
+(0, _on.default)("click", document.body, ".reviseContent", function (t) {
   if (reviseContent.classList.length === 2) {
     if (!t) {
-      reviseContent.classList.remove('active');
+      reviseContent.classList.remove("active");
     }
   }
 });
 closeAddContent.forEach(function (node) {
-  node.addEventListener('click', function () {
-    reviseContent.classList.remove('active');
-    addContent.classList.remove('active');
+  node.addEventListener("click", function () {
+    reviseContent.classList.remove("active");
+    addContent.classList.remove("active");
   });
 }); // 添加网站
 
-var addWebUrl = document.querySelector('#addWebUrl');
-var addWebName = document.querySelector('#addWebName');
-var addDisName = document.querySelector('#addDisName');
-var refer = document.querySelector('#addRefer');
-var color = document.querySelector('.color');
-var colorList = document.querySelector('.colorList');
+var addWebUrl = document.querySelector("#addWebUrl");
+var addWebName = document.querySelector("#addWebName");
+var addDisName = document.querySelector("#addDisName");
+var refer = document.querySelector("#addRefer");
+var color = document.querySelector(".color");
+var colorList = document.querySelector(".colorList");
 var webRecord = {
-  url: url,
-  webName: webName,
-  disName: disName,
-  backColor: backColor
+  url: "",
+  webName: "",
+  disName: "",
+  backColor: ""
 };
-var url;
-var webName;
-var disName;
-var backColor = 'red';
-addWebUrl.addEventListener('input', function (e) {
-  url = e.target.value;
+var newUrl;
+var newWebName;
+var newDisName;
+var newBackColor = "red";
+addWebUrl.addEventListener("input", function (e) {
+  newUrl = e.target.value;
 });
-addWebName.addEventListener('input', function (e) {
-  webName = e.target.value;
+addWebName.addEventListener("input", function (e) {
+  newWebName = e.target.value;
 });
-addDisName.addEventListener('input', function (e) {
-  disName = e.target.value;
+addDisName.addEventListener("input", function (e) {
+  newDisName = e.target.value;
 });
-(0, _on.default)('click', colorList, 'li', function (t) {
+(0, _on.default)("click", colorList, "li", function (t) {
   var className = t.className;
   color.className = "color ".concat(className);
-  backColor = className;
+  newBackColor = className;
 });
-refer.addEventListener('click', function () {
-  if (url) {
-    webRecord.url = 'https://' + url;
-    webName ? webRecord.webName = webName.trim() : webRecord.webName = '';
-    disName ? webRecord.disName = disName.trim() : webRecord.disName = '';
-    webRecord.backColor = backColor;
+refer.addEventListener("click", function () {
+  if (newUrl) {
+    webRecord.url = "https://" + newUrl;
+    newWebName ? webRecord.webName = newWebName.trim() : webRecord.webName = "";
+    newDisName ? webRecord.disName = newDisName.trim() : webRecord.disName = "";
+    webRecord.backColor = newBackColor;
     hashMap.push(webRecord);
     render();
-    addWebUrl.value = '';
-    addWebName.value = '';
-    addDisName.value = '';
-    color.className = 'red';
+    addWebUrl.value = "";
+    addWebName.value = "";
+    addDisName.value = "";
+    color.className = "red";
     webRecord = {
-      url: '',
-      webName: '',
-      disName: '',
+      url: "",
+      webName: "",
+      disName: "",
       backColor: ""
     };
   } else {
-    alert('请填写网址');
+    alert("请填写网址");
   }
 }); // 修改网站
 
-var nowWebName = document.querySelector('#webName');
-var nowDisName = document.querySelector('#disName');
-var nowUrl = document.querySelector('#webUrl');
-var nowColor = document.querySelector('.nowColor');
-var nowColorList = document.querySelector('.nowColorList');
-var change = document.querySelector('#change');
+var nowWebName = document.querySelector("#webName");
+var nowDisName = document.querySelector("#disName");
+var nowUrl = document.querySelector("#webUrl");
+var nowColor = document.querySelector(".nowColor");
+var nowColorList = document.querySelector(".nowColorList");
+var change = document.querySelector("#change");
 var m;
 var nowBackColor;
-siteList.addEventListener('click', function (e) {
+siteList.addEventListener("click", function (e) {
   var t = e.target;
 
-  while (!t.matches('li')) {
-    if (t === siteList || t.matches('.close')) {
+  while (!t.matches("li")) {
+    if (t === siteList || t.matches(".close")) {
       t = null;
       break;
     }
@@ -424,20 +429,21 @@ siteList.addEventListener('click', function (e) {
   }
 
   if (t) {
-    m = t.getAttribute('data');
+    m = t.getAttribute("data");
     nowUrl.value = hashMap[m].url;
     nowDisName.value = hashMap[m].disName;
     nowWebName.value = hashMap[m].webName;
     var className = hashMap[m].backColor;
     nowColor.className = "color ".concat(className);
+    nowBackColor = className;
   }
 });
-(0, _on.default)('click', nowColorList, 'li', function (t) {
+(0, _on.default)("click", nowColorList, "li", function (t) {
   var className = t.className;
   nowColor.className = "color ".concat(className);
   nowBackColor = className;
 });
-change.addEventListener('click', function () {
+change.addEventListener("click", function () {
   hashMap[m].url = nowUrl.value;
   hashMap[m].disName = nowDisName.value;
   hashMap[m].webName = nowWebName.value;
@@ -472,7 +478,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "7172" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "5817" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

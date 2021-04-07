@@ -262,14 +262,16 @@ var objWeb = {
 };
 var names = objWeb.baidu;
 var url = 'https://www.baidu.com/s?tn=02003390_42_hao_pg&ie=utf-8&wd=';
-var angle = 20;
-var n = 0; //更换壁纸
+var angle = 20; //更换壁纸
 
+var imgN = JSON.parse(window.localStorage.getItem("imgN"));
+var n = imgN || 0;
 changeImg.addEventListener('click', function () {
   n += 1;
   angle += 20;
-  changeImg.style.transform = "rotate(".concat(angle, "deg)");
-  document.body.style.background = "no-repeat url(https://bing.ioliu.cn/v1/rand?t=".concat(n, ")");
+  changeImg.style.transform = "rotate(".concat(angle, "deg)"); // document.body.style.background = `no-repeat url(https://bing.mcloc.cn/api?day=${n})`;
+
+  window.localStorage.setItem("imgN", n);
 }); //  阻止默认事件
 
 changeSearch.addEventListener('click', function (e) {
@@ -383,7 +385,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "7172" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "5817" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
