@@ -20,14 +20,16 @@ const objWeb = {
 let names = objWeb.baidu
 let url = 'https://www.baidu.com/s?tn=02003390_42_hao_pg&ie=utf-8&wd='
 let angle = 20
-let n = 0
 
 //更换壁纸
+let imgN = JSON.parse(window.localStorage.getItem("imgN"));
+let n = imgN || 0;
 changeImg.addEventListener('click', () => {
   n += 1
   angle += 20
   changeImg.style.transform = `rotate(${angle}deg)`
-  document.body.style.background = `no-repeat url(https://bing.ioliu.cn/v1/rand?t=${n})`
+  // document.body.style.background = `no-repeat url(https://bing.mcloc.cn/api?day=${n})`;
+  window.localStorage.setItem("imgN", n);
 })
 
 //  阻止默认事件
